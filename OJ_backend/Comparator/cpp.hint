@@ -1,0 +1,2 @@
+﻿#define COMPARATOR_API __declspec(dllexport)
+#define COMPARATOR_API __declspec(dllimport)

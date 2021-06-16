@@ -1,0 +1,178 @@
+<template>
+
+  <div class="problem_container">
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <h1>{{ problemId }}.{{ problemName }}</h1>
+        <el-button-group>
+          <el-button style="display: flex; margin-right: 40px" type="primary" v-on:click="submit">提交</el-button>
+          <!--<el-button style="display: flex " type="primary" v-on:click="toDiscussion" >讨论</el-button>-->
+        </el-button-group>
+
+      </div>
+
+      <el-row>
+        <h2>题目描述</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>{{ problemDescription }}</pre>
+        </el-scrollbar>
+        <!-- <pre>{{problemDescription}}</pre> -->
+      </el-row>
+      <el-row>
+        <h2>输入格式</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>{{ problemInputFormat }}</pre>
+        </el-scrollbar>
+        <!-- <pre>{{problemInputFormat}}</pre> -->
+      </el-row>
+      <el-row>
+        <h2>输出格式</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>{{ problemOutputFormat }}</pre>
+        </el-scrollbar>
+        <!-- <pre>{{problemOutputFormat}}</pre> -->
+      </el-row>
+      <el-row>
+        <h2>输入样例</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>{{ problemSampleInput }}</pre>
+        </el-scrollbar>
+        <!-- <pre>{{problemSampleInput}}</pre> -->
+      </el-row>
+      <el-row>
+        <h2>输出样例</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>{{ problemSampleOutput }}</pre>
+        </el-scrollbar>
+        <!-- <pre>{{problemSampleOutput}}</pre> -->
+      </el-row>
+      <el-row>
+        <h2>时间空内存限制</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre>时间限制:{{ problemTimeLimit }}ms</pre>
+          <pre>内存限制:{{ problemMemoryLimit }}KB</pre>
+        </el-scrollbar>
+        <!-- <div>时间限制:{{problemTimeLimit}}s</div>
+        <div>内存限制:{{problemMemoryLimit}}KB</div> -->
+      </el-row>
+      <el-row>
+        <h2>提示</h2>
+        <el-scrollbar :native="false" noresize="false">
+          <pre class="hint">{{ problemHint }}</pre>
+        </el-scrollbar>
+        <!-- <pre class="hint">
+        {{problemHint}}
+        </pre> -->
+      </el-row>
+
+    </el-card>
+  </div>
+
+</template>
+
+<script>
+export default {
+  name: "Problem",
+  data(){
+    return{
+      problemId:1000,
+      problemDescription: '',
+      problemHint:'',
+      problemInputFormat: '',
+      problemMemoryLimit: 65536,
+      problemName: '',
+      problemOutputFormat: '',
+      problemSampleInput:'',
+      problemSampleOutput: '',
+      problemTimeLimit:1000,
+
+     // isContest:false
+    }
+  },
+  created() {
+    this.problemId=window.location.href.split("?")[1].split("=")[1];
+    // if(window.location.href.split("?")[1].split("&")[1].split("=")[1]==='true'){
+    //   this.isContest=true;
+    // }
+
+    this.getProblem();
+  },
+  methods:{
+    getProblem:function() {
+
+      const url = this.APi;
+      this.$axios.get(url + 'api/problem/getProblemById',
+          {params: {problemId:this.problemId}})
+          .then((response) => {
+            //console.log(response);
+            console.log("题目获取成功")
+            const data = response.data[0];
+            if(response.status === 200){
+              this.problemDescription = data.problem.problemDescription;
+              this.problemHint = data.problem.problemHint;
+              this.problemInputFormat = data.problem.problemInputFormat
+              this.problemOutputFormat = data.problem.problemOutputFormat
+              this.problemMemoryLimit = data.problem.problemMemoryLimit
+              this.problemName = data.problem.problemName
+              this.problemSampleInput = data.problem.problemSampleInput
+              this.problemSampleOutput = data.problem.problemSampleOutput
+              this.problemTimeLimit = data.problem.problemTimeLimit
+
+            }
+            else{
+              console.log("题目获取失败");
+
+            }
+          })
+    },
+
+    submit:function (){
+
+      location='/submit?problemId='+this.problemId;
+      //location='/problem?problemId=1001';
+    },
+    toDiscussion:function (){
+      location='/discussion?problemId='+this.problemId;
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+.problem_container {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.el-card {
+  width: auto;
+}
+
+.hint{
+  border-style:solid;
+  border-color: aliceblue;
+}
+
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both
+}
+
+pre{
+  font-weight: bold;
+  font-size: large;
+}
+
+
+</style>
