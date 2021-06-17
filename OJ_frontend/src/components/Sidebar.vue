@@ -14,24 +14,7 @@
         <a slot="title">首页</a>
       </el-menu-item>
 
-      <el-submenu index="/" class="submenu">
-        <template slot="title">
-            <i class="el-icon-s-custom"></i>
-            <!-- 用户 -->
-        </template>
-        <el-menu-item index="/user">
-            <i class="el-icon-user-solid"></i>
-            <a slot="title">用户信息</a>
-        </el-menu-item>
-        <el-menu-item index="/user/statusList">
-            <i class="el-icon-info"></i>
-            <a slot="title">提交记录</a>
-        </el-menu-item>
-        <el-menu-item index="/user/blogList">
-            <i class="el-icon-s-management"></i>
-            <a slot="title">个人博客</a>
-        </el-menu-item>
-      </el-submenu>
+
 
       <el-menu-item index="/problemList">
         <i class="el-icon-s-order"></i>
@@ -41,20 +24,7 @@
         <i class="el-icon-s-data"></i>
         <a slot="title">提交状态</a>
       </el-menu-item>
-      <el-menu-item index="/blog/list">
-        <i class="el-icon-document"></i>
-        <a slot="title">博客</a>
-      </el-menu-item>
 
-      <el-menu-item index="/rank">
-        <i class="el-icon-s-marketing"></i>
-        <a slot="title">排名</a>
-      </el-menu-item>
-
-      <el-menu-item index="/contestList">
-        <i class="el-icon-s-flag"></i>
-        <a slot="title">比赛</a>
-      </el-menu-item>
 <!--
       <el-menu-item index="/news">
         <i class="el-icon-s-management"></i>

@@ -50,24 +50,32 @@ export default {
 
   created() {
     this.problemId = window.location.href.split("?")[1].split("=")[1];
-    this.userId = sessionStorage.getItem("userid");
+
+    console.log(sessionStorage.getItem("userid")==="undefined")
   },
   methods:{
     submit:function (){
       //console.log(this.code);
+      if(sessionStorage.getItem("userid")==="undefined")
+      {
+        alert("请先登录");
+        location='/login'
+        return ;
+      }
 
 
+      var userId = sessionStorage.getItem("userid");
       const url = this.APi
       this.$axios.post(url + 'api/submission/submit',
           { language: this.language,
                 languageId: this.languageId,
                 problem_id: this.problemId,
-                uid: this.userId,
+                uid: userId,
                 submissionCode: this.code
           })
           .then((response) => {
-            //console.log(response);
-            alert(response.data[0].submissionJudgeResult);
+            console.log(response.status);
+
             location='/status';
           })
     },

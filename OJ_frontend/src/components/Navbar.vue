@@ -1,22 +1,17 @@
 <template>
 
-    <div class="navbar">
+    <div class="navbar" >
 
       <i class="el-icon-s-operation" id="switch" @click="setCollapse"></i>
-      
+
       <p>{{routeName}}</p>
 
       <div class="navbar-item-blank-center"></div>
 
-      <el-dropdown>
         <span class="dropdown-link">
-          <img src="../assets/avater.png" class="avatar"/>
-          <i class="el-icon-caret-bottom"></i>
+          <button v-on:click="logout" >登出</button>
+
         </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="logout"><a >登出</a></el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
     </div>
 
 </template>
@@ -27,7 +22,7 @@ export default {
   computed:{
     routeName(){
         const route = this.$route
-        const { meta, path } = route
+        const { meta} = route
         return meta.name
     }
   },

@@ -68,8 +68,28 @@ bool Compare(char* filePath1, char* filePath2)
 				}
 				++p1; ++p2;
 			}
-			++cnt;
-			std::cout << cnt << "\n";
+			while (line1[p1] != '\0')
+			{
+				if (line1[p1] != '\r' || line1[p1] != '\n')
+				{
+					file1.close();
+					file2.close();
+					return false;
+				}
+				++p1;
+			}
+			while (line2[p2] != '\0')
+			{
+				if (line2[p2] != '\r' || line2[p2] != '\n')
+				{
+					file1.close();
+					file2.close();
+					return false;
+				}
+				++p2;
+			}
+			//++cnt;
+			//std::cout << cnt << "\n";
 		}
 		while (!file1.eof())
 		{
@@ -83,6 +103,7 @@ bool Compare(char* filePath1, char* filePath2)
 					file2.close();
 					return false;
 				}
+				++p;
 			}
 		}
 		while (!file2.eof())
@@ -97,6 +118,7 @@ bool Compare(char* filePath1, char* filePath2)
 					file2.close();
 					return false;
 				}
+				++p;
 			}
 		}
 	}

@@ -29,10 +29,9 @@ router.beforeEach((to, from, next) => {
     // }
     // next()
 
-    //必须登录才能访问其他界面
-    if (to.path === '/login' || to.path === '/register') return next();
-    const login = sessionStorage.getItem("userid");
-    if (!login) return next('/login');
+
+
+
     next();
 })
 

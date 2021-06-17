@@ -1,18 +1,14 @@
 <template>
   <div class="status_container">
 
-    <el-card>
-      <el-input placeholder="请输入要查找的题号" v-model="query" >
-        <el-button slot="append" icon="el-icon-search" v-on:click="getStatusList"></el-button>
-      </el-input>
-    </el-card>
+
 
     <el-row>
       <el-table :data="statusList" >
         <el-table-column label="提交编号" prop="submissionId" >
         </el-table-column>
 
-        <el-table-column label="用户编号" prop="uid" >
+        <el-table-column label="用户名" prop="username" >
         </el-table-column>
 
         <el-table-column label="语言" prop="languageId">
@@ -27,19 +23,21 @@
         <el-table-column label="提交时间" prop="submissionSubmitTime" >
         </el-table-column>
 
-        <el-table-column label="消耗内存" prop="submissionUsedMemory" >
+        <el-table-column label="消耗内存(K)" prop="submissionUsedMemory" >
+
+        </el-table-column>
+        <div>K</div>
+
+        <el-table-column label="消耗时间(ms)" prop="submissionUsedTime" >
         </el-table-column>
 
-        <el-table-column label="消耗时间" prop="submissionUsedTime" >
-        </el-table-column>
 
-        <!--
-        <el-table-column label="查看代码"  >
+        <el-table-column label="查看完整代码"  >
           <template slot-scope="scope">
-            <el-button type="primary" v-on:click="showCode(scope.row)">代码</el-button>
+            <el-button type="primary" v-on:click="showAllCode(scope.row)">完整代码</el-button>
           </template>
         </el-table-column>
-        -->
+
 
 
       </el-table>
@@ -67,7 +65,7 @@ export default {
       total:0,
       pagenum:1,
       pagesize:10,
-      query:''
+
     }
   },
   created() {

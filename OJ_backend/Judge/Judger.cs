@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Judge
@@ -102,9 +103,22 @@ namespace Judge
                 }
             };
             if (inputString != null) process.StartInfo.RedirectStandardInput = true;
+            //Console.WriteLine(fileName);
+            // Thread thread = new Thread(new ParameterizedThreadStart(ExeThread));
+            // thread.Start(process);
+
+            Dictionary<string, Object> dict = new Dictionary<string, object>();
+            dict["time"] = timeLimit.ToString();
+            dict["process"] = process;
+            Thread thread = new Thread(new ParameterizedThreadStart(TimerThread));
+            thread.Start(dict);
 
             process.Start();
             
+            if(process.HasExited)
+            {
+                return new CommandResult(-1, "", "", 0, 0);
+            }
 
             if (inputString != null) process.StandardInput.WriteLine(inputString);
 
@@ -113,10 +127,34 @@ namespace Judge
 
             var standardOut = process.StandardOutput.ReadToEnd();
             var standardError = process.StandardError.ReadToEnd();
+           // Console.WriteLine(process.Id);
             
-            process.WaitForExit(timeLimit);
+            //Console.WriteLine(process.Id);
+            int ExitCode = process.ExitCode;
+            
             
             return new CommandResult(process.ExitCode, standardOut, standardError,memory,time);
+        }
+
+
+        //计时进程
+        public static void TimerThread(Object s)
+        {
+            Dictionary<string, Object> dict = s as Dictionary<string, Object>;
+            int time = int.Parse(dict["time"] as string);
+            Process process = dict["process"] as Process;
+            Thread.Sleep(time);
+            if (!process.HasExited)
+            {
+                try
+                {
+                    process.Kill();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
 
         public static CommandResult Compile(int fileId,Language language)
@@ -168,7 +206,7 @@ namespace Judge
             return null;
         }
 
-        
+
 
         //static void Main()
         //{

@@ -65,7 +65,7 @@ export default {
       if( this.email == "" || this.password == "") {
         alert("请正确输入");
       }
-      const name=this.username;
+      const name=this.email;
       const url = this.APi
       this.$axios.post(url + 'api/account/login',
           {Username: this.email,Password: this.password})
@@ -80,6 +80,7 @@ export default {
                 console.log("Login Success!");
                 sessionStorage.setItem("isLogin", true);
                 sessionStorage.setItem("userid", name);
+                console.log(name)
                 alert("登录成功！" );
                 location = '../';
               }
@@ -97,8 +98,7 @@ export default {
     },
 
     logout:function() {
-      //const url='http://localhost:8081/';
-      //const url='http://106.14.67.53:8081/';
+
       console.log("请求退出登录");
         sessionStorage.setItem("isLogin", false);
         sessionStorage.removeItem("userid");

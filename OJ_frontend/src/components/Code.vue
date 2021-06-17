@@ -23,21 +23,16 @@ export default {
   },
   methods: {
     getCode: function() {
-      //const url='http://localhost:8081/';
-      const url = 'http://106.14.67.53:8081/';
-      this.$axios.get(url + 'getStatusById',
+
+      const url = this.APi;
+      this.$axios.get(url + 'api/submission/getSubmissionById',
           { params: { submissionId:this.submissionId }})
           .then((response) => {
             //console.log(response);
             console.log("代码获取成功")
-            const data = response.data;
-            if(data.code === 200){
-              this.code = data.data.submissionCode;
-            }
-            else{
-              console.log(data.msg);
-              alert(data.msg);
-            }
+            const data = response.data[0];
+
+              this.code = data.submissionCode;
           })
     }
   }
