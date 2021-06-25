@@ -77,6 +77,16 @@ namespace OJ_backend.Controllers
 
             List<Object> response = new List<object>();
 
+            if(!JudgeStringLegal.Class1.Judge(Username))
+            {
+                response.Add(new
+                {
+                    status = 400,
+                    msg = "用户名不合法"
+                });
+                return response;
+            }
+
             Context context = new Context();
 
             User user = context.user.Find(Username);

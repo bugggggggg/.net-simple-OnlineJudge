@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Judge;
 using Microsoft.AspNetCore.Mvc;
-using Mycom;
+
 using OJ_backend.Entities;
 using OJ_backend.Tools;
 
@@ -23,7 +23,7 @@ namespace OJ_backend.Controllers
         // }
 
         [HttpGet]
-        public string Get()
+        public bool Get()
         {
             Context context = new Context();
 
@@ -42,7 +42,10 @@ namespace OJ_backend.Controllers
             //context.SaveChanges();//修改
             //int a = 1, b = 2;
             //JudgeResult result = Judger.Excute(1, 1000, Judger.Language.CPLUSPLUS, 1, 1000, 65535);
-            return "Hello!";
+
+            return JudgeStringLegal.Class1.Judge("ffuck");
+            //return (new Mycom.Class1()).MD5("qwr");
+            //return 1;
             //return result.Msg;
             //Class1 p=new Class1();
 

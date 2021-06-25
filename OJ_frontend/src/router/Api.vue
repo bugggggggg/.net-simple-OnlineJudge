@@ -5,7 +5,8 @@
 </template>
 
 <script>
-const serverSrc="https://localhost:5001/";
+
+const serverSrc="http://192.168.56.1:5000/";
 export default {
   serverSrc
 }

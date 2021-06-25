@@ -31,6 +31,9 @@
     <Reference Include="Judge">
       <HintPath>..\Judge\bin\Debug\Judge.dll</HintPath>
     </Reference>
+    <Reference Include="JudgeStringLegal">
+      <HintPath>..\JudgeStringLegal\bin\Debug\JudgeStringLegal.dll</HintPath>
+    </Reference>
     <Reference Include="Mycom">
       <HintPath>..\..\..\新建文件夹\Mycom\Mycom\bin\Debug\Mycom.dll</HintPath>
     </Reference>

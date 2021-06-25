@@ -29,12 +29,13 @@
            </template>
          </el-table-column>
 
+         <!--
          <el-table-column label="通过率">
            <template slot-scope="scope">
              <p>{{scope.row.problemAcceptCnt}}/{{scope.row.problemSubmitCnt}}</p>
            </template>
          </el-table-column>
-
+        -->
        </el-table>
 
         <!--分页-->

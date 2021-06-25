@@ -85,6 +85,11 @@ export default {
               this.statusList = data.statusList;
               this.total = data.total;
 
+              for(var i=0;i<this.statusList.length;i++)
+              {
+                this.statusList[i].languageId="c++"
+              }
+
               //console.log(this.problemList);
             } else {
               console.log(data.msg);

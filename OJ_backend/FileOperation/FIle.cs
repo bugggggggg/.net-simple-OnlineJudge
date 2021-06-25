@@ -26,10 +26,10 @@ namespace FileOperation
                         if(!fi)
                         {
                             ret += "\n";
-                            fi = false;
+                            
                         }
                         ret += line;
-                        
+                        fi = false;
                     }
                     return ret;
                 }
